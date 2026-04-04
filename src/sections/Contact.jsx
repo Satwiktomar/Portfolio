@@ -4,13 +4,15 @@ import emailjs from '@emailjs/browser'
 import SectionWrapper from '../components/SectionWrapper'
 import SectionHeading from '../components/SectionHeading'
 import { personalInfo, socialLinks } from '../data/portfolio'
-import { FiSend, FiMail, FiMapPin, FiCheck, FiGithub, FiLinkedin } from 'react-icons/fi'
+import { FiSend, FiMail, FiMapPin, FiCheck, FiCopy } from 'react-icons/fi'
+import CopyToast, { useCopyToast } from '../components/CopyToast'
 
 export default function Contact(props) {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [isSending, setIsSending] = useState(false)
   const formRef = useRef()
+  const [copied, copyEmail] = useCopyToast()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -30,7 +32,7 @@ export default function Contact(props) {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
-        (result) => {
+        () => {
           setIsSending(false)
           setSubmitted(true)
           setForm({ name: '', email: '', message: '' })
@@ -39,7 +41,7 @@ export default function Contact(props) {
         },
         (error) => {
           setIsSending(false)
-          console.error("Failed to send message:", error)
+          console.error('Failed to send message:', error)
         }
       )
   }
@@ -51,7 +53,27 @@ export default function Contact(props) {
         subtitle="Have some questions or want to collaborate? Feel free to reach out."
       />
 
-      <div className="w-full flex justify-center px-4 mt-8">
+      {/* Email quick-copy bar */}
+      <div className="flex justify-center mb-8">
+        <motion.button
+          onClick={() => copyEmail(personalInfo.email)}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
+          className="flex items-center gap-3 px-5 py-3 rounded-full glass border border-white/[0.08] hover:border-accent/30 transition-all cursor-pointer group"
+        >
+          <FiMail size={15} className="text-accent" />
+          <span className="text-text-secondary text-sm group-hover:text-white transition-colors">
+            {personalInfo.email}
+          </span>
+          <div className="w-6 h-6 rounded-full bg-white/[0.04] flex items-center justify-center">
+            {copied
+              ? <FiCheck size={12} className="text-green-400" />
+              : <FiCopy size={12} className="text-text-muted group-hover:text-accent transition-colors" />}
+          </div>
+        </motion.button>
+      </div>
+
+      <div className="w-full flex justify-center px-4 mt-4">
         <motion.form
           ref={formRef}
           onSubmit={handleSubmit}
@@ -108,8 +130,8 @@ export default function Contact(props) {
             disabled={isSending}
             className="w-full glow-btn glow-btn-primary flex items-center justify-center gap-2 py-4 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <FiSend size={16} className={isSending ? "animate-pulse" : ""} />
-            {isSending ? "SENDING MESSAGE..." : "Send Message"}
+            <FiSend size={16} className={isSending ? 'animate-pulse' : ''} />
+            {isSending ? 'SENDING MESSAGE...' : 'Send Message'}
           </button>
         </motion.form>
       </div>
@@ -134,6 +156,9 @@ export default function Contact(props) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Email copy toast */}
+      <CopyToast show={copied} />
     </SectionWrapper>
   )
 }
