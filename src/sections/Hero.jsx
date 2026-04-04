@@ -4,108 +4,106 @@ import { personalInfo, socialLinks } from '../data/portfolio'
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative z-10 min-h-screen flex items-center justify-center px-6">
-      <div className="max-w-4xl mx-auto text-center w-full">
-        {/* Status badge */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.9 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-text-secondary text-sm">Available for opportunities</span>
-        </motion.div> */}
-
-        {/* Avatar */}
+    <section id="hero" className="relative z-10 min-h-[calc(100vh-80px)] flex items-center justify-center px-6 py-20 pb-32 sm:py-0">
+      <div className="max-w-[1200px] mx-auto w-full flex flex-col md:flex-row items-center gap-12 md:gap-20">
+        
+        {/* Avatar - Left Side */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 2.0 }}
-          className="mb-8 flex justify-center"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex-shrink-0 relative"
         >
+          {/* subtle back glow for the large image */}
+          <div className="absolute inset-0 bg-indigo-500/20 rounded-full blur-[80px] -z-10" />
           <img
             src={personalInfo.avatarUrl}
             alt={personalInfo.name}
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white/10 shadow-2xl object-cover bg-white/5"
-            onError={(e) => { e.target.style.display = 'none' }} // fallback if no photo is present yet
+            className="w-64 h-64 sm:w-80 sm:h-80 md:w-[420px] md:h-[420px] rounded-full border-2 border-white/5 shadow-2xl object-cover bg-black"
+            onError={(e) => { e.target.style.display = 'none' }} 
           />
         </motion.div>
 
-        {/* Name Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight mb-4 text-white"
-        >
-          {personalInfo.name}
-        </motion.h1>
-
-        {/* Bio */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.3 }}
-          className="text-text-secondary text-base sm:text-lg mx-auto mb-8 leading-relaxed space-y-3"
-        >
-          {personalInfo.bio.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </motion.div>
-
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.4 }}
-          className="flex items-center justify-center gap-3 mb-8"
-        >
-          <a href={socialLinks.github} target="_blank" rel="noopener noreferrer"
-            className="w-10 h-10 rounded-xl glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] transition-all">
-            <FiGithub size={18} />
-          </a>
-          <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
-            className="w-10 h-10 rounded-xl glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] transition-all">
-            <FiLinkedin size={18} />
-          </a>
-        </motion.div>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a href="#projects" className="glow-btn glow-btn-primary flex items-center gap-2">
-            View Projects
-            <FiArrowRight size={16} />
-          </a>
-          <a
-            href={personalInfo.resumeUrl}
-            download
-            className="glow-btn flex items-center gap-2"
+        {/* Content - Right Side */}
+        <div className="flex-1 text-center md:text-left flex flex-col items-center md:items-start">
+          
+          {/* Greeting & Name */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-6"
           >
-            <FiDownload size={16} />
-            Download Resume
-          </a>
-        </motion.div>
+            <h2 className="text-xl sm:text-2xl text-text-muted mb-3 font-medium flex items-center justify-center md:justify-start gap-2">
+              Hello <span className="inline-block animate-[wave_2.5s_infinite] origin-bottom-right">👋</span>, I am
+            </h2>
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] font-bold leading-[1.1] tracking-tight text-white mb-2">
+              {personalInfo.name}
+            </h1>
+          </motion.div>
 
-        {/* Scroll indicator */}
+          {/* Bio Paragraphs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-text-secondary text-base sm:text-xl mb-10 leading-relaxed font-light max-w-2xl"
+          >
+            {/* Render BIO but map specific keywords to accent colors for pop */}
+            {personalInfo.bio.map((para, i) => (
+              <span key={i} className="block mb-2">
+                {para}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* Actions & Socials */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center gap-5 mt-2"
+          >
+            <a href="#contact" className="glow-btn glow-btn-primary px-8 py-3.5 text-[15px] rounded-full font-semibold shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+              Contact Me
+            </a>
+            
+            <a
+              href={personalInfo.resumeUrl}
+              download
+              className="glow-btn px-8 py-3.5 text-[15px] flex items-center gap-2 rounded-full border border-white/10 hover:bg-white/5 active:scale-95 transition-all"
+            >
+              <FiDownload size={18} />
+              Resume
+            </a>
+
+            <div className="flex items-center gap-3 md:ml-4 mt-4 sm:mt-0">
+              <a href={socialLinks.github} target="_blank" rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] border border-white/5 transition-all active:scale-90">
+                <FiGithub size={20} />
+              </a>
+              <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] border border-white/5 transition-all active:scale-90">
+                <FiLinkedin size={20} />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Scroll indicator - Global */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3.2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-2 text-text-muted"
+            className="flex flex-col items-center gap-2 text-text-muted/60"
           >
-            <span className="text-xs tracking-widest uppercase">Scroll</span>
-            <FiChevronDown size={18} />
+            <span className="text-[10px] tracking-widest uppercase font-semibold">Scroll</span>
+            <FiChevronDown size={14} opacity={0.6} />
           </motion.div>
         </motion.div>
       </div>

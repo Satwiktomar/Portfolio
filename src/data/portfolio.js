@@ -1,9 +1,9 @@
 import { FaReact, FaNodeJs, FaPython, FaDocker, FaGitAlt, FaJava, FaDatabase, FaBrain, FaRobot, FaChartBar, FaCubes, FaMicrophone, FaCode, FaNetworkWired } from 'react-icons/fa'
 import {
   SiTensorflow, SiPytorch, SiMongodb, SiTailwindcss, SiJavascript,
-  SiPostgresql, SiOpencv, SiOpenai, SiFlask, SiKeras, SiScikitlearn, 
+  SiPostgresql, SiOpencv, SiOpenai, SiFlask, SiKeras, SiScikitlearn,
   SiNumpy, SiPandas, SiCodechef, SiCodeforces, SiLeetcode, SiGithub,
-  SiSelenium
+  SiSelenium, SiCplusplus, SiHuggingface, SiSpacy, SiFastapi
 } from 'react-icons/si'
 
 // ─── Navigation ───
@@ -11,7 +11,7 @@ export const navLinks = [
   { name: 'About', href: '#hero' },
   { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Coding', href: '#coding' },
+  { name: 'Coding Profiles', href: '#coding' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -21,15 +21,12 @@ export const personalInfo = {
   tagline: 'ML Engineer & Developer',
   email: 'satwiktomar77@gmail.com',
   location: 'Bengaluru, India',
-  resumeUrl: '/assets/resume/resume_march_2.pdf',
+  resumeUrl: '/assets/resume/resume_april_1.pdf',
   avatarUrl: '/assets/profile.jpg', // Place your photo at public/assets/profile.jpg
   bio: [
-    "I am a Machine Learning Engineer and Developer pursuing a BE in Computer Science (Cybersecurity) at Dayananda Sagar College of Engineering (GPA: 9.0).",
-    "Passionate about Machine Learning & AI.",
-    "Exploring Blockchain Technologies.",
-    "Interested in NLP & Deep Learning.",
-    "Love building scalable ML solutions.",
-    "Constantly learning and improving."
+    ' A Machine Learning Engineer focused on building intelligent systems that scale.',
+    'I work at the intersection of AI, deep learning, and real-world applications, with a growing interest in secure and decentralized technologies.',
+    'I care about clarity, performance, and solving problems that actually matter.'
   ],
   stats: [
     { value: '9.0', label: 'Current GPA' },
@@ -106,10 +103,18 @@ export const services = [
 // ─── Projects ───
 export const projects = [
   {
+    title: 'Cryptael Vault',
+    description: 'Secure full-stack data vault featuring custom AES-GCM encryption. Engineered the blockchain integration and encryption engines for persistent cryptographic tracking and immutability.',
+    tags: ['Next.js', 'Django', 'Blockchain', 'AES-GCM', 'Docker'],
+    github: 'https://github.com/Hack2A/ds-vault',
+    image: '/assets/projects/cryptael_vault.jpeg',
+    featured: true,
+  },
+  {
     title: 'BeaverAI',
     description: 'Multimodal AI interview platform integrating Whisper transcription, LLM questioning, and neural speech synthesis. Automated proctoring via OpenCV and MediaPipe.',
     tags: ['Python', 'FastAPI', 'Whisper', 'MediaPipe', 'LLM'],
-    github: 'https://github.com/Satwiktomar',
+    github: 'https://github.com/Hack2A/ai-interview-app',
     image: '/assets/projects/beaverai.jpeg',
     featured: true,
   },
@@ -117,7 +122,7 @@ export const projects = [
     title: 'AlignithmAI',
     description: 'AI Resume & ATS Analyzer using Gemini embeddings and cosine similarity. Features a 7-dim ATS scoring pipeline and TTL vector caching for low latency.',
     tags: ['Python', 'FastAPI', 'Gemini API', 'PostgreSQL'],
-    github: 'https://github.com/Satwiktomar',
+    github: 'https://github.com/Satwiktomar/AlignithmAI',
     image: '/assets/projects/alignithmai.jpeg',
     featured: true,
   },
@@ -125,7 +130,7 @@ export const projects = [
     title: 'AquaGenesis',
     description: 'AI eDNA Taxonomic Classifier built to classify eukaryotic taxa. Utilizes a hybrid CNN + HDBSCAN architecture for novel species discovery.',
     tags: ['TensorFlow', 'Keras', 'BioPython', 'HDBSCAN'],
-    github: 'https://github.com/Satwiktomar',
+    github: 'https://github.com/Hack2A/eDNA-sih25',
     image: '/assets/projects/aquagenesis.jpg',
     featured: true,
   },
@@ -133,7 +138,7 @@ export const projects = [
     title: 'ReviewNexus',
     description: 'Data pipeline scraping 150K+ reviews from Google Maps using Playwright. Includes DistilBERT-based sentiment analysis and complex weighted rankings.',
     tags: ['Python', 'Playwright', 'Flask', 'DistilBERT'],
-    github: 'https://github.com/Satwiktomar',
+    github: 'https://github.com/Satwiktomar/ReviewNexus',
     image: '/assets/projects/reviewnexus.jpeg',
     featured: false,
   },
@@ -152,6 +157,7 @@ export const experiences = [
   {
     role: 'Machine Learning Engineer',
     company: 'Padho.AI',
+    url: 'https://learn.padho.ai',
     period: 'Oct 2025 — Jan 2026',
     description: 'Reduced TTS infrastructure costs by 80% by fine-tuning and deploying Piper TTS locally. Improved image generation efficiency and reduced costs by 60% using optimized Stable Diffusion and OwlViT pipelines.',
     technologies: ['Python', 'Piper TTS', 'Stable Diffusion', 'OwlViT'],
@@ -162,48 +168,49 @@ export const experiences = [
 export const techStack = [
   // Programming & Base
   { name: 'Python', icon: FaPython, color: '#3776AB' },
-  { name: 'C++', icon: FaCode, color: '#00599C' },
+  { name: 'C++', icon: SiCplusplus, color: '#00599C' },
   { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
   { name: 'SQL', icon: FaDatabase, color: '#4169E1' },
-  
+
   // Data & ML
   { name: 'Pandas', icon: SiPandas, color: '#150458' },
   { name: 'NumPy', icon: SiNumpy, color: '#013243' },
-  { name: 'Scikit-learn', icon: SiScikitlearn, color: '#F7931E' },
-  
+  { name: 'Scikit-learn', icon: 'https://skillicons.dev/icons?i=scikitlearn', color: '#F7931E' },
+
   // DL & Frameworks
-  { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-  { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
+  { name: 'TensorFlow', icon: 'https://skillicons.dev/icons?i=tensorflow', color: '#FF6F00' },
+  { name: 'PyTorch', icon: 'https://skillicons.dev/icons?i=pytorch', color: '#EE4C2C' },
   { name: 'Keras', icon: SiKeras, color: '#D00000' },
-  
+
   // NLP & LLMs
-  { name: 'Transformers', icon: FaRobot, color: '#FFD21E' },
-  { name: 'spaCy', icon: FaCode, color: '#09A3D5' },
-  { name: 'NLTK', icon: FaCode, color: '#3776AB' },
+  { name: 'Transformers', icon: 'https://avatars.githubusercontent.com/u/25720743?v=4', color: '#FFD21E' },
+  { name: 'spaCy', icon: SiSpacy, color: '#09A3D5' },
+  { name: 'NLTK', icon: 'https://avatars.githubusercontent.com/u/4925181?v=4', color: '#3776AB' },
   { name: 'ChromaDB', icon: FaDatabase, color: '#F38020' },
-  { name: 'LLMs & RAG', icon: FaBrain, color: '#ffffff' },
-  
+  { name: 'LLMs & RAG', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg', color: '#ffffff' },
+
   // Gen AI & CV
-  { name: 'Stable Diffusion', icon: FaBrain, color: '#8854d0' },
-  { name: 'OWL-ViT', icon: FaCubes, color: '#f368e0' },
-  { name: 'OpenCV', icon: SiOpencv, color: '#5C3EE8' },
-  { name: 'MediaPipe', icon: FaNetworkWired, color: '#00B4D8' },
-  
+  { name: 'Stable Diffusion', icon: 'https://avatars.githubusercontent.com/u/100448165?v=4', color: '#8854d0' },
+  { name: 'OWL-ViT', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg', color: '#f368e0' },
+  { name: 'OpenCV', icon: 'https://skillicons.dev/icons?i=opencv', color: '#5C3EE8' },
+  { name: 'MediaPipe', icon: 'https://avatars.githubusercontent.com/u/127116417?v=4', color: '#00B4D8' },
+
   // Speech & Clustering
-  { name: 'Librosa', icon: FaMicrophone, color: '#FFB74D' },
-  { name: 'HDBSCAN', icon: FaChartBar, color: '#4CAF50' },
-  
+  { name: 'Librosa', icon: 'https://avatars.githubusercontent.com/u/10452906?v=4', color: '#FFB74D' },
+  { name: 'HDBSCAN', icon: 'https://avatars.githubusercontent.com/u/365630?v=4', color: '#4CAF50' },
+
   // Scraping
   { name: 'Selenium', icon: SiSelenium, color: '#43B02A' },
   { name: 'Playwright', icon: FaRobot, color: '#2EAD33' },
-  { name: 'BeautifulSoup', icon: FaCode, color: '#ffffff' },
-  
+  { name: 'BeautifulSoup', icon: 'https://ui-avatars.com/api/?name=BS&background=2EAD33&color=fff&rounded=true&font-size=0.35', color: '#ffffff' },
+
   // Bioinformatics
-  { name: 'BioPython', icon: FaCubes, color: '#FFEB3B' },
-  
+  { name: 'BioPython', icon: 'https://avatars.githubusercontent.com/u/2552945?v=4', color: '#FFEB3B' },
+
   // Web & Infrastructure
   { name: 'React', icon: FaReact, color: '#61DAFB' },
-  { name: 'Flask / FastAPI', icon: SiFlask, color: '#ffffff' },
+  { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
+  { name: 'Flask', icon: SiFlask, color: '#ffffff' },
   { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
   { name: 'Docker', icon: FaDocker, color: '#2496ED' },
   { name: 'Git', icon: FaGitAlt, color: '#F05032' },
@@ -249,8 +256,8 @@ export const achievements = [
     type: 'award',
   },
   {
-    title: 'Top 16 in CTF',
-    description: 'Secured a Top 16 finish globally in a Capture the Flag (CTF) security competition.',
+    title: 'Top 16 in College Level CTF',
+    description: 'Secured a Top 16 finish at the college level in a Capture the Flag (CTF) cybersecurity competition.',
     year: '2024',
     type: 'award',
   },
@@ -270,6 +277,7 @@ export const chatbotKnowledge = {
   about: "Satwik Tomar is a Machine Learning Engineer and Cybersecurity student (GPA: 9.0) at Dayananda Sagar College of Engineering. He specializes in LLMs, RAG, Web Automation, and Cybersecurity.",
   skills: "Satwik works with Python, C++, SQL, TensorFlow, Keras, HuggingFace Transformers, FastAPI, Flask, Playwright, PostgreSQL, and Docker. He's an expert in ML/AI, NLP, Computer Vision, and full-stack API design.",
   projects: {
+    'cryptael': "Cryptael Vault is a secure Next.js & Django data vault featuring custom AES-GCM encryption and blockchain integration for immutable, seed-phrase derived encryption records.",
     'beaverai': "BeaverAI is a multimodal AI interview platform. It integrates Whisper for transcription, LLMs for questioning, neural TTS, and automated webcam proctoring using OpenCV & MediaPipe.",
     'alignithmai': "AlignithmAI is an AI Resume & ATS Analyzer. It uses Gemini embeddings for resume-job matching and a 7-dim objective ATS scoring pipeline.",
     'aquagenesis': "AquaGenesis is an AI eDNA Taxonomic Classifier combining a CNN and HDBSCAN to classify eukaryotic taxa from environmental DNA.",

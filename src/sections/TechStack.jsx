@@ -12,7 +12,7 @@ export default function TechStack() {
       />
 
       {/* Main Grid */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 max-w-5xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 max-w-5xl mx-auto">
         {techStack.map((tech, i) => {
           const IconComponent = tech.icon
           return (
@@ -23,16 +23,30 @@ export default function TechStack() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 8) * 0.04, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -6, scale: 1.05, transition: { duration: 0.2 } }}
-              className="glass group cursor-pointer p-4 flex flex-col items-center gap-3 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
+              className="glass group cursor-pointer p-5 sm:p-6 flex flex-col items-center gap-4 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
             >
-              <IconComponent
-                size={28}
-                className="text-text-muted group-hover:drop-shadow-[0_0_12px_var(--glow)] transition-all duration-300"
-                style={{ '--glow': tech.color, color: 'inherit' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = tech.color }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '' }}
-              />
-              <span className="text-text-muted text-xs text-center group-hover:text-white transition-colors">
+              {typeof IconComponent === 'string' ? (
+                <img
+                  src={IconComponent}
+                  alt={tech.name}
+                  className="w-10 h-10 object-contain transition-all duration-300 drop-shadow-[0_0_8px_var(--glow)] group-hover:drop-shadow-[0_0_20px_var(--glow-bright)] group-hover:scale-110 rounded-md"
+                  style={{
+                    '--glow': `${tech.color}40`,
+                    '--glow-bright': `${tech.color}a0`
+                  }}
+                />
+              ) : (
+                <IconComponent
+                  size={42}
+                  className="transition-all duration-300 drop-shadow-[0_0_8px_var(--glow)] group-hover:drop-shadow-[0_0_20px_var(--glow-bright)] group-hover:scale-110"
+                  style={{
+                    color: tech.color,
+                    '--glow': `${tech.color}40`,
+                    '--glow-bright': `${tech.color}a0`
+                  }}
+                />
+              )}
+              <span className="text-white/80 text-sm sm:text-base font-medium text-center group-hover:text-white transition-colors mt-1">
                 {tech.name}
               </span>
             </motion.div>
@@ -49,7 +63,11 @@ export default function TechStack() {
             const IconComponent = tech.icon
             return (
               <div key={`${tech.name}-${i}`} className="mx-6 flex items-center gap-2 text-text-muted/50">
-                <IconComponent size={16} />
+                {typeof IconComponent === 'string' ? (
+                  <img src={IconComponent} alt={tech.name} className="w-4 h-4 object-contain grayscale opacity-60" />
+                ) : (
+                  <IconComponent size={16} />
+                )}
                 <span className="text-sm">{tech.name}</span>
               </div>
             )

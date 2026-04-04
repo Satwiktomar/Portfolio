@@ -18,18 +18,18 @@ export default function Navbar() {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-[5%] right-[5%] z-50 transition-all duration-300 ${scrolled ? 'glass-strong shadow-[0_4px_30px_rgba(0,0,0,0.3)]' : 'bg-transparent'
+      className={`fixed top-0 left-[5%] right-[5%] z-50 transition-all duration-300 rounded-b-3xl ${scrolled ? 'glass-strong shadow-[0_4px_30px_rgba(0,0,0,0.3)]' : 'bg-transparent'
         }`}
     >
-      <div className="w-[95%] mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="w-full px-8 md:px-12 lg:px-16 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-2.5 group">
+        <a href="#hero" className="flex items-center gap-3 group">
           <img
             src={personalInfo.avatarUrl}
             alt="Logo"
-            className="w-8 h-8 rounded-full object-cover group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-shadow border border-white/10"
+            className="w-9 h-9 rounded-full object-cover group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-shadow border border-white/10"
           />
-          <span className="font-display font-semibold text-white text-lg">Satwik</span>
+          <span className="font-display font-bold text-white text-[1.15rem] leading-none tracking-wide pt-0.5">Satwik Tomar</span>
         </a>
 
         {/* Desktop Links */}
@@ -44,8 +44,8 @@ export default function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
             </a>
           ))}
-          <a href={personalInfo.resumeUrl} download className="glow-btn glow-btn-primary text-sm flex items-center gap-2 !py-2 !px-5">
-            <FiDownload size={14} />
+          <a href={personalInfo.resumeUrl} download className="glow-btn glow-btn-primary flex items-center gap-2 !py-2.5 !px-6">
+            <FiDownload size={16} />
             Resume
           </a>
         </div>

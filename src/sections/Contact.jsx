@@ -48,7 +48,7 @@ export default function Contact(props) {
     <SectionWrapper id="contact">
       <SectionHeading
         title="Get in Touch"
-        subtitle="Have a project in mind? Let's build something great together."
+        subtitle="Have some questions or want to collaborate? Feel free to reach out."
       />
 
       <div className="w-full flex justify-center px-4 mt-8">
@@ -59,10 +59,10 @@ export default function Contact(props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="glass-strong p-8 sm:p-12 space-y-6 w-full max-w-3xl"
+          className="glass-strong p-8 sm:p-14 space-y-8 w-full max-w-4xl"
         >
           <div>
-            <label htmlFor="contact-name" className="block text-sm text-text-secondary mb-2">Name</label>
+            <label htmlFor="contact-name" className="block text-base font-medium text-text-secondary mb-3">Name</label>
             <input
               id="contact-name"
               type="text"
@@ -71,12 +71,12 @@ export default function Contact(props) {
               onChange={handleChange}
               placeholder="Your name"
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-text-muted text-sm focus:outline-none focus:border-accent/40 focus:shadow-[0_0_20px_rgba(99,102,241,0.1)] transition-all duration-300"
+              className="w-full px-6 py-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-text-muted text-base focus:outline-none focus:border-accent/40 focus:shadow-[0_0_20px_rgba(99,102,241,0.1)] transition-all duration-300"
             />
           </div>
 
           <div>
-            <label htmlFor="contact-email" className="block text-sm text-text-secondary mb-2">Email</label>
+            <label htmlFor="contact-email" className="block text-base font-medium text-text-secondary mb-3">Email</label>
             <input
               id="contact-email"
               type="email"
@@ -85,28 +85,28 @@ export default function Contact(props) {
               onChange={handleChange}
               placeholder="your@email.com"
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-text-muted text-sm focus:outline-none focus:border-accent/40 focus:shadow-[0_0_20px_rgba(99,102,241,0.1)] transition-all duration-300"
+              className="w-full px-6 py-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-text-muted text-base focus:outline-none focus:border-accent/40 focus:shadow-[0_0_20px_rgba(99,102,241,0.1)] transition-all duration-300"
             />
           </div>
 
           <div>
-            <label htmlFor="contact-message" className="block text-sm text-text-secondary mb-2">Message</label>
+            <label htmlFor="contact-message" className="block text-base font-medium text-text-secondary mb-3">Message</label>
             <textarea
               id="contact-message"
               name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder="Tell me about your project..."
-              rows={5}
+              placeholder="Feel free to reach out..."
+              rows={6}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-text-muted text-sm focus:outline-none focus:border-accent/40 focus:shadow-[0_0_20px_rgba(99,102,241,0.1)] transition-all duration-300 resize-none"
+              className="w-full px-6 py-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-text-muted text-base leading-relaxed focus:outline-none focus:border-accent/40 focus:shadow-[0_0_20px_rgba(99,102,241,0.1)] transition-all duration-300 resize-none"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSending}
-            className="w-full glow-btn glow-btn-primary flex items-center justify-center gap-2 py-3.5 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full glow-btn glow-btn-primary flex items-center justify-center gap-2 py-4 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <FiSend size={16} className={isSending ? "animate-pulse" : ""} />
             {isSending ? "SENDING MESSAGE..." : "Send Message"}
