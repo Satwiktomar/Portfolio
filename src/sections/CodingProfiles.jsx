@@ -10,51 +10,50 @@ export default function CodingProfiles() {
   useEffect(() => {
     let isMounted = true;
     
-    const fetchLiveStats = async () => {
-      // Create a deep copy of the static profiles to safely mutate
-      const liveProfiles = codingProfiles.map(p => ({ ...p }));
-
-      // 1. Fetch live LeetCode stats
-      try {
-        const lcRes = await fetch('https://leetcode-stats-api.herokuapp.com/satwickk49');
-        const lcData = await lcRes.json();
-        if (lcData.status === 'success' && lcData.totalSolved) {
-          const lcIndex = liveProfiles.findIndex(p => p.platform === 'LeetCode');
-          if (lcIndex !== -1) liveProfiles[lcIndex].rating = `${lcData.totalSolved} Problems Solved`;
-        }
-      } catch (err) { console.warn('LeetCode fetch failed, falling back to static.'); }
-
-      // 2. Fetch live Codeforces stats
-      try {
-        const cfRes = await fetch('https://codeforces.com/api/user.info?handles=satwickk49');
-        const cfData = await cfRes.json();
-        if (cfData.status === 'OK' && cfData.result?.[0]?.rating) {
-          const cfIndex = liveProfiles.findIndex(p => p.platform === 'Codeforces');
-          if (cfIndex !== -1) {
-            const rating = cfData.result[0].rating;
-            let rank = cfData.result[0].rank || 'Active';
-            rank = rank.charAt(0).toUpperCase() + rank.slice(1); // Capitalize
-            liveProfiles[cfIndex].rating = `${rank} (${rating})`;
-          }
-        }
-      } catch (err) { console.warn('Codeforces fetch failed, falling back to static.'); }
-
-      // 3. Fetch live GitHub stats (Total Contributions)
-      try {
-        const ghRes = await fetch('https://github-contributions-api.deno.dev/Satwiktomar.json');
-        const ghData = await ghRes.json();
-        if (ghData && ghData.totalContributions !== undefined) {
-          const ghIndex = liveProfiles.findIndex(p => p.platform === 'GitHub');
-          if (ghIndex !== -1) liveProfiles[ghIndex].rating = `${ghData.totalContributions} Contributions`;
-        }
-      } catch (err) { console.warn('GitHub contributions fetch failed, falling back to static.'); }
-
-      if (isMounted) {
-        setProfiles(liveProfiles);
-      }
+    // Helper to incrementally update a single platform's rating safely
+    const updateProfile = (platform, newRating) => {
+      if (!isMounted) return;
+      setProfiles(prev => prev.map(p => p.platform === platform ? { ...p, rating: newRating } : p));
     };
 
-    fetchLiveStats();
+    // 1. Fetch live LeetCode stats
+    // We don't await this so it doesn't block the other fetches if Heroku sleeps/times out
+    fetch('https://leetcode-stats-api.herokuapp.com/satwickk49')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success' && data.totalSolved) {
+          updateProfile('LeetCode', `${data.totalSolved} Problems Solved`);
+        }
+      })
+      .catch(err => console.warn('LeetCode fetch failed', err));
+
+    // 2. Fetch live Codeforces stats
+    fetch('https://codeforces.com/api/user.info?handles=satwickk49')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'OK' && data.result?.[0]) {
+          const user = data.result[0];
+          let rank = user.rank || user.maxRank || 'Active';
+          rank = rank.charAt(0).toUpperCase() + rank.slice(1);
+          
+          if (user.rating) {
+            updateProfile('Codeforces', `${rank} (${user.rating})`);
+          } else {
+            updateProfile('Codeforces', rank); // Fallback for unrated/newbie
+          }
+        }
+      })
+      .catch(err => console.warn('Codeforces fetch failed', err));
+
+    // 3. Fetch live GitHub stats (Total Contributions)
+    fetch('https://github-contributions-api.deno.dev/Satwiktomar.json')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.totalContributions !== undefined) {
+          updateProfile('GitHub', `${data.totalContributions} Contributions`);
+        }
+      })
+      .catch(err => console.warn('GitHub fetch failed', err));
     
     return () => { isMounted = false; };
   }, []);
