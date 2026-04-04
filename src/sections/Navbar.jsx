@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { navLinks, personalInfo } from '../data/portfolio'
 import { FiMenu, FiX, FiDownload } from 'react-icons/fi'
+import ThemeToggle from '../components/ThemeToggle'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -44,20 +45,24 @@ export default function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />
             </a>
           ))}
+          <ThemeToggle />
           <a href={personalInfo.resumeUrl} download className="glow-btn glow-btn-primary flex items-center gap-2 !py-2.5 !px-6">
             <FiDownload size={16} />
             Resume
           </a>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-white p-2 cursor-pointer"
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-        </button>
+        {/* Mobile: Theme Toggle + Menu */}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-white p-2 cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
