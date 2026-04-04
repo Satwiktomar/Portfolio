@@ -17,11 +17,11 @@ export default function CodingProfiles() {
     };
 
     // 1. Fetch live LeetCode stats
-    // We don't await this so it doesn't block the other fetches if Heroku sleeps/times out
-    fetch('https://leetcode-stats-api.herokuapp.com/satwickk49')
+    // We don't await this so it doesn't block the other fetches if APIs sleep/timeout
+    fetch('https://leetcode-api-faisalshohag.vercel.app/satwickk49')
       .then(res => res.json())
       .then(data => {
-        if (data.status === 'success' && data.totalSolved) {
+        if (data && data.totalSolved !== undefined) {
           updateProfile('LeetCode', `${data.totalSolved} Problems Solved`);
         }
       })
