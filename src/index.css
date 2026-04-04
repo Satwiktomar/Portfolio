@@ -134,7 +134,13 @@ body {
 
 /* ─── Section ─── */
 .section-padding {
-  padding: 120px 24px;
+  padding: 60px 16px;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 120px 24px;
+  }
 }
 
 /* ─── Gradient Text ─── */

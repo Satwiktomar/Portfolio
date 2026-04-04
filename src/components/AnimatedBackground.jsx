@@ -3,6 +3,17 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, MeshDistortMaterial, Sphere, Sparkles } from '@react-three/drei'
 import * as THREE from 'three'
 
+// Detect if running on a mobile-width viewport
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
+  return isMobile
+}
+
 function DataCore() {
   const groupRef = useRef()
   const materialRef = useRef()
@@ -93,9 +104,9 @@ function DataCore() {
   )
 }
 
-function Starfield() {
+function Starfield({ isMobile }) {
   const particlesRef = useRef()
-  const count = 1200
+  const count = isMobile ? 400 : 1200
 
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3)
@@ -182,25 +193,29 @@ function GridFloor() {
 }
 
 export default function AnimatedBackground() {
+  const isMobile = useIsMobile()
+
   return (
     <div className="three-canvas">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 60 }}
-        dpr={[1, 2]} // Better resolution scaling
-        gl={{ antialias: true, alpha: true }} 
+        dpr={[1, isMobile ? 1 : 2]}
+        gl={{ antialias: !isMobile, alpha: true }} 
         style={{ background: 'transparent' }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1.5} color="#06b6d4" />
         <pointLight position={[-10, -10, -10]} intensity={2} color="#a855f7" />
         
-        <DataCore />
-        <Starfield />
-        <GridFloor />
+        {/* Only render the heavy sphere on desktop */}
+        {!isMobile && <DataCore />}
         
-        {/* Layered deeper sparkles to create infinite depth */}
-        <Sparkles count={200} scale={15} size={1.2} speed={0.3} opacity={0.15} color="#a855f7" noise={1} />
-        <Sparkles count={100} scale={20} size={2.5} speed={0.1} opacity={0.1} color="#06b6d4" noise={2} />
+        <Starfield isMobile={isMobile} />
+        {!isMobile && <GridFloor />}
+        
+        {/* Fewer sparkles on mobile for performance */}
+        <Sparkles count={isMobile ? 60 : 200} scale={15} size={1.2} speed={0.3} opacity={0.15} color="#a855f7" noise={1} />
+        {!isMobile && <Sparkles count={100} scale={20} size={2.5} speed={0.1} opacity={0.1} color="#06b6d4" noise={2} />}
       </Canvas>
     </div>
   )

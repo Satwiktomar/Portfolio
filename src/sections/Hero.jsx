@@ -19,7 +19,7 @@ export default function Hero() {
           <img
             src={personalInfo.avatarUrl}
             alt={personalInfo.name}
-            className="w-64 h-64 sm:w-80 sm:h-80 md:w-[420px] md:h-[420px] rounded-full border-2 border-white/5 shadow-2xl object-cover bg-black"
+            className="w-44 h-44 sm:w-64 sm:h-64 md:w-[420px] md:h-[420px] rounded-full border-2 border-white/5 shadow-2xl object-cover bg-black"
             onError={(e) => { e.target.style.display = 'none' }} 
           />
         </motion.div>
@@ -34,10 +34,10 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mb-6"
           >
-            <h2 className="text-xl sm:text-2xl text-text-muted mb-3 font-medium flex items-center justify-center md:justify-start gap-2">
+            <h2 className="text-base sm:text-xl text-text-muted mb-2 font-medium flex items-center justify-center md:justify-start gap-2">
               Hello <span className="inline-block animate-[wave_2.5s_infinite] origin-bottom-right">👋</span>, I am
             </h2>
-            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] font-bold leading-[1.1] tracking-tight text-white mb-2">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold leading-[1.1] tracking-tight text-white mb-2">
               {personalInfo.name}
             </h1>
           </motion.div>
@@ -47,9 +47,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-text-secondary text-base sm:text-xl mb-10 leading-relaxed font-light max-w-2xl"
+            className="text-text-secondary text-sm sm:text-xl mb-6 leading-relaxed font-light max-w-2xl"
           >
-            {/* Render BIO but map specific keywords to accent colors for pop */}
             {personalInfo.bio.map((para, i) => (
               <span key={i} className="block mb-2">
                 {para}
@@ -62,29 +61,29 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center gap-5 mt-2"
+            className="flex flex-row flex-wrap items-center justify-center md:justify-start gap-3 mt-2"
           >
-            <a href="#contact" className="glow-btn glow-btn-primary px-8 py-3.5 text-[15px] rounded-full font-semibold shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+            <a href="#contact" className="glow-btn glow-btn-primary px-6 py-3 text-sm sm:text-[15px] rounded-full font-semibold shadow-lg shadow-indigo-500/20 active:scale-95 transition-all min-h-[44px] flex items-center">
               Contact Me
             </a>
             
             <a
               href={personalInfo.resumeUrl}
               download
-              className="glow-btn px-8 py-3.5 text-[15px] flex items-center gap-2 rounded-full border border-white/10 hover:bg-white/5 active:scale-95 transition-all"
+              className="glow-btn px-6 py-3 text-sm sm:text-[15px] flex items-center gap-2 rounded-full border border-white/10 hover:bg-white/5 active:scale-95 transition-all min-h-[44px]"
             >
-              <FiDownload size={18} />
+              <FiDownload size={16} />
               Resume
             </a>
 
-            <div className="flex items-center gap-3 md:ml-4 mt-4 sm:mt-0">
+            <div className="flex items-center gap-3 mt-1">
               <a href={socialLinks.github} target="_blank" rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] border border-white/5 transition-all active:scale-90">
-                <FiGithub size={20} />
+                className="w-11 h-11 rounded-full glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] border border-white/5 transition-all active:scale-90">
+                <FiGithub size={18} />
               </a>
               <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] border border-white/5 transition-all active:scale-90">
-                <FiLinkedin size={20} />
+                className="w-11 h-11 rounded-full glass flex items-center justify-center text-text-muted hover:text-white hover:bg-white/[0.08] border border-white/5 transition-all active:scale-90">
+                <FiLinkedin size={18} />
               </a>
             </div>
           </motion.div>

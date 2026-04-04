@@ -123,7 +123,7 @@ export default function ChatbotButton() {
                   scale: { delay: 1.5, duration: 0.5, type: 'spring' },
                   y: { repeat: Infinity, duration: 3, ease: 'easeInOut', delay: 1.5 }
                 }}
-                className="absolute -top-16 right-2 bg-white/[0.05] backdrop-blur-xl border border-white/[0.1] text-white text-xs px-4 py-2.5 rounded-2xl rounded-br-sm shadow-[0_10px_30px_rgba(0,0,0,0.5)] whitespace-nowrap font-medium z-10"
+                className="absolute -top-16 right-2 hidden sm:block bg-white/[0.05] backdrop-blur-xl border border-white/[0.1] text-white text-xs px-4 py-2.5 rounded-2xl rounded-br-sm shadow-[0_10px_30px_rgba(0,0,0,0.5)] whitespace-nowrap font-medium z-10"
               >
                 Have some questions? 
                 <div className="absolute -bottom-1.5 right-4 w-3 h-3 bg-white/[0.05] border-r border-b border-white/[0.1] rotate-45 backdrop-blur-md" />
@@ -136,7 +136,7 @@ export default function ChatbotButton() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(true)}
-                className="w-16 h-16 rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.1] shadow-[0_0_30px_rgba(99,102,241,0.3)] flex items-center justify-center text-white cursor-pointer relative overflow-hidden transition-transform z-20 group"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.1] shadow-[0_0_30px_rgba(99,102,241,0.3)] flex items-center justify-center text-white cursor-pointer relative overflow-hidden transition-transform z-20 group"
               >
                 <div className="absolute inset-0 bg-accent opacity-0 group-hover:opacity-20 transition-opacity z-10" />
                 {/* The Mascot Image (Scaled to fix built-in padding) */}

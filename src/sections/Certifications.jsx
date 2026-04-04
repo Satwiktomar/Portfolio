@@ -11,7 +11,7 @@ export default function Certifications() {
         subtitle="Professional credentials and verified expertise in AI and Cloud infrastructure."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-8">
         {certifications.map((cert, index) => (
           <motion.a
             href={cert.link}
@@ -23,7 +23,7 @@ export default function Certifications() {
             whileHover={{ y: -5 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="glass p-8 rounded-2xl border border-white/10 hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all flex flex-col justify-center items-center text-center cursor-pointer group"
+            className="glass p-5 sm:p-8 rounded-2xl border border-white/10 hover:border-accent/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all flex flex-col justify-center items-center text-center cursor-pointer group"
           >
             {cert.image ? (
               <img src={cert.image} alt={cert.issuer} className="h-16 mb-6 object-contain group-hover:scale-105 transition-transform" />

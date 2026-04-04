@@ -15,7 +15,7 @@ export default function Achievements() {
         {achievements.map((ach, i) => {
           return (
             <div key={ach.title}>
-              <Card delay={i * 0.08} className="h-full flex flex-col items-center justify-center text-center p-8 sm:p-10">
+              <Card delay={i * 0.08} className="h-full flex flex-col items-center justify-center text-center p-5 sm:p-8 md:p-10">
                 <span className="text-accent-light text-xs font-medium tracking-widest uppercase mb-3">
                   {ach.year}
                 </span>

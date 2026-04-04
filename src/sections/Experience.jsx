@@ -25,11 +25,11 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`w-full glass p-8 rounded-2xl hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 group ${exp.url ? 'cursor-pointer hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] hover:-translate-y-1' : ''}`}
+              className={`w-full glass p-5 sm:p-8 rounded-2xl hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 group ${exp.url ? 'cursor-pointer hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] hover:-translate-y-1' : ''}`}
             >
               <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mb-4 gap-2 text-center sm:text-left">
                 <div>
-                  <h3 className="font-display text-2xl font-semibold text-white group-hover:text-accent-light transition-colors">
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-white group-hover:text-accent-light transition-colors">
                     {exp.role}
                   </h3>
                   <p className="text-accent-light text-lg font-medium">{exp.company}</p>
