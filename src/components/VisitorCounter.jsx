@@ -21,21 +21,77 @@ function useCountUp(target, duration = 1500) {
 }
 
 export default function VisitorCounter() {
-  const [total, setTotal] = useState(null)
-  const displayed = useCountUp(total)
+  const [views, setViews] = useState(null)
+  const [uniques, setUniques] = useState(null)
+  
+  const displayedViews = useCountUp(views)
+  const displayedUniques = useCountUp(uniques)
 
   useEffect(() => {
-    // counterapi.dev — free, no auth, increments on hit
+    // 1. Total page views: always increment on load. 
+    // Using the original 'visits' key to preserve the higher history count.
     fetch('https://api.counterapi.dev/v1/satwiktomar-portfolio/visits/up')
       .then(r => r.json())
       .then(data => {
-        if (data?.count !== undefined) setTotal(data.count)
+        if (data?.count !== undefined) setViews(data.count)
       })
-      .catch(() => {}) // Silently fail — counter simply won't show
+      .catch(() => {})
+
+    // 2. Unique visitors: check local storage to prevent duplicate counting
+    const hasVisited = localStorage.getItem('has_visited_portfolio')
+    
+    if (!hasVisited) {
+      // New visitor: increment unique count
+      fetch('https://api.counterapi.dev/v1/satwiktomar-portfolio/uniques/up')
+        .then(r => r.json())
+        .then(data => {
+          if (data?.count !== undefined) {
+            setUniques(data.count)
+            localStorage.setItem('has_visited_portfolio', 'true')
+          } else {
+            setUniques(0) // Fallback trigger
+          }
+        })
+        .catch(() => setUniques(0))
+    } else {
+      // Returning visitor: fetch current unique count without incrementing
+      fetch('https://api.counterapi.dev/v1/satwiktomar-portfolio/uniques')
+        .then(r => r.json())
+        .then(data => {
+          if (data?.count !== undefined) {
+            setUniques(data.count)
+          } else {
+            setUniques(0) // Fallback trigger
+          }
+        })
+        .catch(() => setUniques(0))
+    }
   }, [])
 
-  if (!total) return null
+  // If views haven't loaded at all (e.g. ad blocker), just hide entirely
+  if (views === null) return null
 
+  // If uniques failed to load or API blocked it, fall back to the original single stat
+  if (uniques === null || uniques === 0) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="flex items-center justify-center gap-2 text-text-muted text-sm"
+      >
+        <FiEye size={14} className="text-accent opacity-70" />
+        <span>
+          <span className="text-white/60 font-semibold tabular-nums">
+            {displayedViews.toLocaleString()}
+          </span>
+          {' '}developers have visited
+        </span>
+      </motion.div>
+    )
+  }
+
+  // Both loaded successfully
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -45,10 +101,15 @@ export default function VisitorCounter() {
     >
       <FiEye size={14} className="text-accent opacity-70" />
       <span>
+        Visited{' '}
         <span className="text-white/60 font-semibold tabular-nums">
-          {displayed.toLocaleString()}
+          {displayedViews.toLocaleString()}
         </span>
-        {' '}developers have visited
+        {' '}times by{' '}
+        <span className="text-white/60 font-semibold tabular-nums">
+          {displayedUniques.toLocaleString()}
+        </span>
+        {' '}developers
       </span>
     </motion.div>
   )
