@@ -44,7 +44,7 @@ export default function Footer() {
             <div className="w-full max-w-2xl h-px bg-white/[0.06]" />
             <VisitorCounter />
             <p className="text-text-muted text-sm flex items-center justify-center gap-1.5">
-              © {new Date().getFullYear()} Satwik Tomar. Built with <FiHeart size={14} className="text-accent" /> and React.
+              © {new Date().getFullYear()} Satwik Tomar. Built with <FiHeart size={14} className="text-accent" /> 
             </p>
           </div>
         </div>
