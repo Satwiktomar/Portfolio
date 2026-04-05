@@ -24,13 +24,12 @@ export default function Navbar() {
     >
       <div className="w-full px-8 md:px-12 lg:px-16 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#hero" className="flex items-center gap-3 group">
+        <a href="#hero" className="flex items-center group">
           <img
-            src={personalInfo.avatarUrl}
-            alt="Logo"
-            className="w-9 h-9 rounded-full object-cover group-hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-shadow border border-white/10"
+            src="/assets/logo_nobg.png"
+            alt="Satwik Tomar"
+            className="h-16 sm:h-20 md:h-24 w-auto object-contain scale-110 origin-left filter group-hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.6)] transition-all duration-300"
           />
-          <span className="font-display font-bold text-white text-[1.15rem] leading-none tracking-wide pt-0.5">Satwik Tomar</span>
         </a>
 
         {/* Desktop Links */}

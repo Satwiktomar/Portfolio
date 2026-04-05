@@ -272,7 +272,7 @@ export const achievements = [
 // ─── Chatbot Knowledge Base ───
 export const chatbotKnowledge = {
   greetings: [
-    "Hey there! 👋 I'm Satwik's AI assistant. Ask me anything about his skills, projects, or experience!",
+    "Hey there! 👋 I'm ViT, Satwik's personal AI assistant. Ask me anything about his skills, projects, or experience!",
   ],
   about: "Satwik Tomar is a Machine Learning Engineer and Cybersecurity student (GPA: 9.0) at Dayananda Sagar College of Engineering. He specializes in LLMs, RAG, Web Automation, and Cybersecurity.",
   skills: "Satwik works with Python, C++, SQL, TensorFlow, Keras, HuggingFace Transformers, FastAPI, Flask, Playwright, PostgreSQL, and Docker. He's an expert in ML/AI, NLP, Computer Vision, and full-stack API design.",
@@ -289,6 +289,6 @@ export const chatbotKnowledge = {
   contact: "You can reach Satwik at satwiktomar77@gmail.com, on LinkedIn at linkedin.com/in/satwiktomar49, or check out his code on GitHub at github.com/Satwiktomar.",
   hobbies: "Satwik is deeply involved in competitive programming (150+ DSA problems, 2-star on CodeChef), and he holds multiple Oracle AI Certifications.",
   certifications: "Satwik is an Oracle AI Vector Search Certified Professional, an OCI Generative AI Certified Professional, and holds the OCI AI Foundations Associate certification.",
-  achievements: "Satwik qualified for the GATE DA 2026 exam, secured a Top 16 Global finish in a cybersecurity CTF, and organized SANDBOX, Karnataka's largest cybersecurity hackathon.",
+  achievements: "Satwik qualified for the GATE DA 2026 exam, secured a Top 16 finish in a cybersecurity CTF, and organized SANDBOX, Karnataka's largest cybersecurity hackathon.",
   fallback: "I can only answer questions about Satwik Tomar's resume, including Padho.AI experience, AI projects like BeaverAI and AquaGenesis, or his skills in Python and ML. Try asking about his experience!",
 }
