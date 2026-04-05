@@ -45,7 +45,7 @@ export default function Navbar() {
             </a>
           ))}
           <ThemeToggle />
-          <a href={personalInfo.resumeUrl} download className="glow-btn glow-btn-primary flex items-center gap-2 !py-2.5 !px-6">
+          <a href={personalInfo.resumeUrl} download="Satwik_Tomar_Resume.pdf" type="application/pdf" target="_blank" rel="noopener noreferrer" className="glow-btn glow-btn-primary flex items-center gap-2 !py-2.5 !px-6">
             <FiDownload size={16} />
             Resume
           </a>
@@ -90,7 +90,10 @@ export default function Navbar() {
               ))}
               <a
                 href={personalInfo.resumeUrl}
-                download
+                download="Satwik_Tomar_Resume.pdf"
+                type="application/pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 className="glow-btn glow-btn-primary flex items-center justify-center gap-2 mt-3 w-full"
               >

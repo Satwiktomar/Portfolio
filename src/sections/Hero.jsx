@@ -90,7 +90,10 @@ export default function Hero() {
             
             <a
               href={personalInfo.resumeUrl}
-              download
+              download="Satwik_Tomar_Resume.pdf"
+              type="application/pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="glow-btn px-6 py-3 text-sm sm:text-[15px] flex items-center gap-2 rounded-full border border-white/10 hover:bg-white/5 active:scale-95 transition-all min-h-[44px]"
             >
               <FiDownload size={16} />
