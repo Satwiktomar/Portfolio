@@ -25,7 +25,7 @@ export default function LoadingScreen({ isLoading }) {
               <img
                 src="/assets/logo.png"
                 alt="Logo"
-                className="relative w-20 h-20 rounded-full object-cover border-2 border-white/10 shadow-2xl"
+                className="relative w-32 h-32 rounded-full object-cover border-2 border-white/10 shadow-2xl"
                 onError={(e) => { e.target.style.display = 'none' }}
               />
             </div>
