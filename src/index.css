@@ -209,6 +209,16 @@ body {
   pointer-events: none;
 }
 
+/* ─── Project placeholder pulse ─── */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
 /* ─── Marquee ─── */
 @keyframes marquee {
   0% { transform: translateX(0); }
@@ -277,6 +287,18 @@ body {
 [data-theme="light"] body {
   background: #f0f4ff;
   color: #0f172a;
+}
+
+/* ─── Light Mode: Navbar logo ─── */
+/* logo_nobg.png is a white/light asset — invert it for visibility on the light bg */
+[data-theme="light"] img[data-logo] {
+  filter: invert(1) hue-rotate(180deg) brightness(0.15) contrast(1.2);
+  transition: filter 0.3s;
+}
+
+[data-theme="light"] a:hover img[data-logo] {
+  filter: invert(1) hue-rotate(180deg) brightness(0.15) contrast(1.2)
+          drop-shadow(0 0 12px rgba(99, 102, 241, 0.5));
 }
 
 /* Override all CSS custom properties for light mode */

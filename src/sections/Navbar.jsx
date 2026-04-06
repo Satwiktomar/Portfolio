@@ -28,6 +28,7 @@ export default function Navbar() {
           <img
             src="/assets/logo_nobg.png"
             alt="Satwik Tomar"
+            data-logo
             className="h-16 sm:h-20 md:h-24 w-auto object-contain scale-110 origin-left filter group-hover:drop-shadow-[0_0_15px_rgba(99,102,241,0.6)] transition-all duration-300"
           />
         </a>
