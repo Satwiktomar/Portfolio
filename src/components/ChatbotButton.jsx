@@ -140,10 +140,10 @@ export default function ChatbotButton() {
                   scale: { delay: 1.5, duration: 0.5, type: 'spring' },
                   y: { repeat: Infinity, duration: 3, ease: 'easeInOut', delay: 1.5 }
                 }}
-                className="absolute -top-14 right-2 hidden sm:block bg-[#111] border border-white/10 text-white/90 text-xs px-4 py-2 rounded-2xl rounded-br-sm shadow-xl whitespace-nowrap font-medium z-10"
+                className="chatbot-bubble absolute -top-12 right-0 hidden sm:block bg-[#111] border border-white/10 text-white/90 text-xs px-4 py-2 rounded-2xl rounded-br-sm shadow-xl whitespace-nowrap font-medium z-10"
               >
                 Have some questions?
-                <div className="absolute -bottom-1 right-4 w-2 h-2 bg-[#111] border-r border-b border-white/10 rotate-45" />
+                <div className="chatbot-bubble-tail absolute -bottom-1 right-4 w-2 h-2 bg-[#111] border-r border-b border-white/10 rotate-45" />
               </motion.div>
 
               <motion.button
@@ -176,7 +176,7 @@ export default function ChatbotButton() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: 'spring', bounce: 0.25 }}
-              className="absolute bottom-0 right-0 w-[calc(100vw-3rem)] sm:w-[380px] h-[550px] max-h-[85vh] bg-[#0c0c0c]/90 rounded-2xl shadow-2xl border border-white/10 flex flex-col overflow-hidden backdrop-blur-2xl"
+              className="chatbot-panel absolute bottom-0 right-0 w-[calc(100vw-3rem)] sm:w-[380px] h-[550px] max-h-[85vh] bg-[#0c0c0c]/90 rounded-2xl shadow-2xl border border-white/10 flex flex-col overflow-hidden backdrop-blur-2xl"
             >
               {/* Header */}
               <div className="px-5 py-4 border-b border-white/10 bg-white/[0.02] flex items-center justify-between shrink-0">
