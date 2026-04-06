@@ -11,7 +11,6 @@ const isMobileDevice = () =>
 
 export default function Projects() {
   const [hoveredIdx, setHoveredIdx] = useState(null)
-  const [brokenImages, setBrokenImages] = useState(new Set())
   const isMobile = isMobileDevice()
 
   return (
@@ -51,54 +50,20 @@ export default function Projects() {
                 className="glass-surface group cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_8px_60px_rgba(99,102,241,0.15)] block h-full rounded-xl border border-white/[0.08] hover:border-accent/30"
               >
                 {/* Project Image */}
-                <div className="relative w-full h-44 overflow-hidden">
-                  {/* Themed placeholder — rendered if no image or image is broken */}
-                  {(!project.image || brokenImages.has(project.title)) && (
-                    <div className="project-placeholder absolute inset-0 flex flex-col items-center justify-center select-none pointer-events-none">
-                      {/* Animated gradient background */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-violet-600/20 animate-pulse-slow" />
-                      <div className="absolute inset-0 bg-gradient-to-tl from-accent/10 via-transparent to-purple-400/10" />
-                      {/* Dot grid texture */}
-                      <div
-                        className="absolute inset-0 opacity-[0.07]"
-                        style={{
-                          backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)',
-                          backgroundSize: '20px 20px'
-                        }}
-                      />
-                      {/* Corner accent lines */}
-                      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-accent/40 rounded-tl" />
-                      <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-accent/40 rounded-tr" />
-                      <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-accent/40 rounded-bl" />
-                      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-accent/40 rounded-br" />
-                      {/* Project initial glyph */}
-                      <div className="relative z-10 flex flex-col items-center gap-2">
-                        <div className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 backdrop-blur-sm flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.15)]">
-                          <span className="font-display text-2xl font-bold text-accent/70">
-                            {project.title.charAt(0)}
-                          </span>
-                        </div>
-                        <span className="text-[10px] tracking-[0.2em] uppercase font-medium text-accent/40">
-                          Under Construction
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {project.image && !brokenImages.has(project.title) && (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="relative z-10 w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                      onError={() => {
-                        setBrokenImages(prev => {
-                          const next = new Set(prev)
-                          next.add(project.title)
-                          return next
-                        })
-                      }}
-                    />
-                  )}
+                <div className="relative w-full h-44 bg-gradient-to-br from-accent/[0.08] to-purple-500/[0.08] overflow-hidden">
+                  <img
+                    src={project.image || ''}
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-[0.85] group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                    onError={(e) => {
+                      e.target.style.display = 'none'
+                      e.target.nextElementSibling.style.display = 'flex'
+                    }}
+                  />
+                  {/* Fallback when no image or image breaks */}
+                  <div className="absolute inset-0 hidden items-center justify-center text-text-muted/40 text-4xl font-bold font-display">
+                    {project.title.charAt(0)}
+                  </div>
 
                   {/* Hover overlay with description */}
                   <AnimatePresence>
@@ -108,7 +73,7 @@ export default function Projects() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                        className="absolute inset-0 z-20 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
                       >
                         <p className="text-white/90 text-sm text-center leading-relaxed">
                           {project.description}

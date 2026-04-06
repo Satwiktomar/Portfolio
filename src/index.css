@@ -209,15 +209,6 @@ body {
   pointer-events: none;
 }
 
-/* ─── Project placeholder pulse ─── */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
-}
 
 /* ─── Marquee ─── */
 @keyframes marquee {
