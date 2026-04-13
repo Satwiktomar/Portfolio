@@ -44,60 +44,128 @@ export default function ChatbotButton() {
     scrollToBottom()
   }, [messages, isTyping])
 
-  // Simple keyword-based intent matching specific to Satwik
+  // Advanced keyword-based intent matching with scoring
   const getBotResponse = (query) => {
-    const q = query.toLowerCase()
+    const q = query.toLowerCase();
 
-    // Project specific queries
-    if (q.includes('beaver') || q.includes('interview')) return chatbotKnowledge.projects.beaverai
-    if (q.includes('alignithm') || q.includes('resume') || q.includes('ats')) return chatbotKnowledge.projects.alignithmai
-    if (q.includes('edna') || q.includes('sih') || q.includes('aqua') || q.includes('genesis')) return chatbotKnowledge.projects.aquagenesis
-    if (q.includes('review') || q.includes('nexus') || q.includes('maps')) return chatbotKnowledge.projects.reviewnexus
-    if (q.includes('medipal') || q.includes('health')) return chatbotKnowledge.projects.medipal
+    const intents = [
+      {
+        keywords: ['beaverai', 'beaver', 'interview', 'proctoring', 'whisper', 'mediapipe', 'camera', 'video', 'tts', 'audio'],
+        response: chatbotKnowledge.projects.beaverai,
+        weight: 2
+      },
+      {
+        keywords: ['alignithmai', 'alignithm', 'resume', 'ats', 'analyzer', 'gemini', 'scoring', 'similarity'],
+        response: chatbotKnowledge.projects.alignithmai,
+        weight: 2
+      },
+      {
+        keywords: ['cryptael', 'crypt', 'vault', 'encryption', 'aes', 'blockchain', 'django', 'seed phrase', 'cybersecurity'],
+        response: chatbotKnowledge.projects.cryptael,
+        weight: 2
+      },
+      {
+        keywords: ['aquagenesis', 'edna', 'sih', 'aqua', 'genesis', 'bio', 'taxa', 'classifier', 'hdbscan', 'cnn'],
+        response: chatbotKnowledge.projects.aquagenesis,
+        weight: 2
+      },
+      {
+        keywords: ['reviewnexus', 'nexus', 'map', 'maps', 'sentiment', 'scraper', 'playwright', 'distilbert', 'review'],
+        response: chatbotKnowledge.projects.reviewnexus,
+        weight: 2
+      },
+      {
+        keywords: ['medipal', 'health', 'doctor', 'patient', 'medical', 'hospital'],
+        response: chatbotKnowledge.projects.medipal,
+        weight: 2
+      },
+      {
+        keywords: ['project', 'built', 'made', 'work on', 'portfolio', 'develop', 'create', 'github'],
+        response: `Satwik has built numerous AI projects! His featured ones are Cryptael Vault (Blockchain/Custom Crypto), BeaverAI (Interview Platform), and AlignithmAI. You can ask me specifically about any of these!`,
+        weight: 1
+      },
+      {
+        keywords: ['skill', 'tech', 'stack', 'language', 'know', 'python', 'c++', 'sql', 'react', 'machine learning', 'ml', 'ai', 'framework', 'database', 'docker', 'tool'],
+        response: chatbotKnowledge.skills,
+        weight: 1
+      },
+      {
+        keywords: ['experience', 'work', 'intern', 'job', 'padho', 'padho.ai', 'role', 'hire', 'company', 'employ'],
+        response: chatbotKnowledge.experience,
+        weight: 1.5
+      },
+      {
+        keywords: ['contact', 'email', 'reach', 'github', 'linkedin', 'phone', 'call', 'message', 'social', 'connect'],
+        response: chatbotKnowledge.contact,
+        weight: 1
+      },
+      {
+        keywords: ['education', 'study', 'college', 'university', 'gpa', 'degree', 'dsce', 'dayananda', 'student', 'graduate', 'grade'],
+        response: chatbotKnowledge.education,
+        weight: 1
+      },
+      {
+        keywords: ['certificat', 'oracle', 'oci', 'credential', 'vector', 'generative ai', 'certified'],
+        response: chatbotKnowledge.certifications,
+        weight: 1.5
+      },
+      {
+        keywords: ['achieve', 'gate', 'ctf', 'hackathon', 'award', 'competition', 'sandbox', 'glitchcraft', 'win', 'won'],
+        response: chatbotKnowledge.achievements,
+        weight: 1.5
+      },
+      {
+        keywords: ['competitive', 'leetcode', 'dsa', 'codechef', 'problem', 'codeforces', 'rating', 'star', 'solving', 'algorithm'],
+        response: `Satwik is an active competitive programmer. He has solved over 150 DSA problems across LeetCode, CodeChef, and Codeforces, focusing heavily on algorithms and optimization.`,
+        weight: 1.5
+      },
+      {
+        keywords: ['hello', 'hi', 'hey', 'greetings', 'morning', 'afternoon', 'what\'s up', 'sup'],
+        response: `Hello! I'm ViT, Satwik's personal assistant. How can I help you learn more about his background?`,
+        weight: 0.8
+      },
+      {
+        keywords: ['who are you', 'what are you', 'name', 'bot', 'assistant', 'vit'],
+        response: `I am ViT, a custom assistant built into Satwik's portfolio. My knowledge is restricted to answering questions about Satwik Tomar's professional background, skills, and projects.`,
+        weight: 2
+      },
+      {
+        keywords: ['about', 'who is', 'tell me about satwik', 'background', 'intro', 'bio'],
+        response: chatbotKnowledge.about,
+        weight: 1
+      }
+    ];
 
-    // General queries
-    if (q.includes('project') || q.includes('built') || q.includes('made') || q.includes('work')) {
-      return `Satwik has built numerous AI projects! His featured ones are BeaverAI (Interview Platform), AlignithmAI, and AquaGenesis. You can ask me specifically about any of these!`
+    let bestIntent = null;
+    let maxScore = 0;
+
+    for (const intent of intents) {
+      let score = 0;
+      for (const kw of intent.keywords) {
+        // Escape special regex characters
+        const escapedKw = kw.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        const regex = new RegExp(`\\b${escapedKw}\\b`, 'i');
+        
+        if (regex.test(q)) {
+          // Score matches heavily based on the keyword's length to favor specificity
+          score += (kw.length * intent.weight);
+        } else if (q.includes(kw) && kw.length >= 5) {
+          // Catch partial matches on substantive words as a fallback
+          score += (kw.length * 0.5 * intent.weight);
+        }
+      }
+      
+      if (score > maxScore) {
+        maxScore = score;
+        bestIntent = intent;
+      }
     }
 
-    if (q.includes('skill') || q.includes('tech') || q.includes('stack') || q.includes('language') || q.includes('know')) {
-      return chatbotKnowledge.skills
+    if (maxScore >= 4 && bestIntent) { // threshold to prevent single letter false positives
+      return bestIntent.response;
     }
 
-    if (q.includes('experience') || q.includes('work') || q.includes('intern') || q.includes('job') || q.includes('padho')) {
-      return chatbotKnowledge.experience
-    }
-
-    if (q.includes('contact') || q.includes('email') || q.includes('hire') || q.includes('reach') || q.includes('github') || q.includes('linkedin')) {
-      return chatbotKnowledge.contact
-    }
-
-    if (q.includes('education') || q.includes('study') || q.includes('college') || q.includes('university') || q.includes('gpa') || q.includes('degree')) {
-      return chatbotKnowledge.education
-    }
-
-    if (q.includes('certificat') || q.includes('oracle') || q.includes('oci')) {
-      return chatbotKnowledge.certifications
-    }
-
-    if (q.includes('achieve') || q.includes('gate') || q.includes('ctf') || q.includes('hackathon')) {
-      return chatbotKnowledge.achievements
-    }
-
-    if (q.includes('competitive') || q.includes('leetcode') || q.includes('dsa') || q.includes('codechef') || q.includes('problem')) {
-      return `Satwik is an active competitive programmer. He has solved over 150 DSA problems across LeetCode, CodeChef, and Codeforces, focusing heavily on algorithms and optimization.`
-    }
-
-    if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) {
-      return `Hello! I'm ViT, Satwik's personal assistant. How can I help you learn more about his background?`
-    }
-
-    if (q.includes('who are you') || q.includes('what are you') || q.includes('name')) {
-      return `I am ViT, a custom assistant built into Satwik's portfolio. My knowledge is restricted to answering questions about Satwik Tomar's professional background, skills, and projects.`
-    }
-
-    // Default fallback
-    return chatbotKnowledge.fallback
+    return chatbotKnowledge.fallback;
   }
 
   const handleSend = (textQuery) => {
