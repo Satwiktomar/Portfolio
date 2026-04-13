@@ -21,7 +21,7 @@ export const personalInfo = {
   tagline: 'ML Engineer & Developer',
   email: 'satwiktomar77@gmail.com',
   location: 'Bengaluru, India',
-  resumeUrl: '/assets/resume/resume_april_1.pdf',
+  resumeUrl: '/assets/resume/Satwiktomar_resume_april_2.pdf',
   avatarUrl: '/assets/profile.jpg', // Place your photo at public/assets/profile.jpg
   bio: [
     ' A Machine Learning Engineer focused on building intelligent systems that scale.',
